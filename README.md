@@ -24,7 +24,7 @@ Install the published crate from crates.io by adding this to your application's
 
 ```toml
 [dependencies]
-pretty_table_rs = "0.1.0"
+pretty_table_rs = "0.1.1"
 ```
 
 Or run `cargo add pretty_table_rs` in your application's directory.
@@ -676,7 +676,7 @@ exporters without either parser:
 
 ```toml
 [dependencies]
-pretty_table_rs = { version = "0.1.0", default-features = false }
+pretty_table_rs = { version = "0.1.1", default-features = false }
 ```
 
 Add `features = ["csv"]` or `features = ["html"]` to enable either one separately.
