@@ -508,4 +508,4 @@ for details. The optional scripts in `tools/` regenerate maintenance artifacts.
 
 CI is configured for Linux, macOS, and Windows with stable Rust and Rust 1.85.0.
 
-BSD-3-Clause. See [LICENSE](LICENSE) and [third-party notices](docs/THIRD_PARTY_NOTICES.md).
+BSD-3-Clause. See [LICENSE](https://github.com/younisshah/pretty_table/blob/main/LICENSE) and [third-party notices](docs/THIRD_PARTY_NOTICES.md).
