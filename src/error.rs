@@ -8,14 +8,23 @@ pub enum Error {
     /// A requested column does not exist, such as "Agge" instead of "Age".
     UnknownField(String),
     /// A two-column table was given a row with a different number of cells.
-    RowLength { expected: usize, actual: usize },
+    RowLength {
+        expected: usize,
+        actual: usize,
+    },
     DuplicateField(String),
     IndexOutOfRange(usize),
     /// Values such as the number 2 and the string "two" cannot be ordered together.
-    Incomparable { left: String, right: String },
+    Incomparable {
+        left: String,
+        right: String,
+    },
     InvalidOption(String),
     /// A display-width limit is too small; for example, 中 alone already needs width 2.
-    CannotFit { needed: usize, limit: usize },
+    CannotFit {
+        needed: usize,
+        limit: usize,
+    },
     /// JSON has no number representation for NaN or infinity.
     JsonNonFinite,
     /// A parsed integer is outside the supported i64/u64 range; it is not rounded.
