@@ -1,0 +1,10 @@
+{
+  "44fe20c5cbeec0df": {
+    "rule": "7: honour the maximum table width instead of preserving the upstream FIXME",
+    "expected": "+---+\n| F |\n+---+\n| 0 |\n+---+"
+  },
+  "507c4b38692843f7": {
+    "rule": "4: replace actual null cells only; preserve the literal string None",
+    "expected": "+---------+---------+---------+---------+\n| Field 1 | Field 2 | Field 3 | Field 4 |\n+---------+---------+---------+---------+\n| value 1 |   N/A   |   None  |         |\n+---------+---------+---------+---------+"
+  }
+}

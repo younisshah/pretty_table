@@ -1,0 +1,45 @@
+name: Rust
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        toolchain: [stable, '1.85.0']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Install Rust
+        run: rustup toolchain install ${{ matrix.toolchain }} --profile minimal --component rustfmt --component clippy
+      - name: Select Rust
+        run: rustup default ${{ matrix.toolchain }}
+      - name: Fetch dependencies
+        run: cargo fetch --locked
+      - name: Formatting
+        run: cargo fmt --all -- --check
+      - name: Clippy
+        run: cargo clippy --locked --offline --all-targets --all-features -- -D warnings
+      - name: All features
+        run: cargo test --locked --offline --all-features
+      - name: Core only
+        run: cargo test --locked --offline --no-default-features
+      - name: CSV only
+        run: cargo test --locked --offline --no-default-features --features csv
+      - name: HTML only
+        run: cargo test --locked --offline --no-default-features --features html
+      - name: Documentation
+        run: cargo doc --locked --offline --no-deps --all-features
+        env:
+          RUSTDOCFLAGS: -D warnings
+      - name: Package
+        run: cargo package --locked --offline --allow-dirty
+

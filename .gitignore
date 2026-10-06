@@ -1,0 +1,9 @@
+/target/
+/upstream/
+/.superpowers/
+.idea
+docs/IMPLEMENTATION_PLAN.md
+docs/VERIFICATION.md
+docs/COMPATIBILITY.md
+target
+tests/MANIFEST.md
