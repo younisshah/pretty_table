@@ -1,11 +1,12 @@
 [package]
-name = "pretty_table"
+name = "pretty_table_rs"
 version = "0.1.0"
 edition = "2024"
 rust-version = "1.85"
 description = "Typed, Unicode-aware tables inspired by Python PrettyTable"
 license = "BSD-3-Clause"
 readme = "README.md"
+repository = "https://github.com/younisshah/pretty_table"
 keywords = ["table", "terminal", "unicode", "formatting"]
 categories = ["command-line-interface", "text-processing"]
 exclude = ["upstream/", "target/", ".superpowers/"]

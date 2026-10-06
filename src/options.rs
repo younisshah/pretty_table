@@ -66,7 +66,7 @@ pub enum Format {
 /// `Scalar` also supplies a default for future columns; `Map` changes named columns.
 ///
 /// ```
-/// use pretty_table::{Align, ColumnValue, Table};
+/// use pretty_table_rs::{Align, ColumnValue, Table};
 /// let mut table = Table::with_fields(["Name", "Age"]).unwrap();
 /// table.set_align(ColumnValue::Scalar(Align::Left)).unwrap();
 /// table.set_align(ColumnValue::Map(

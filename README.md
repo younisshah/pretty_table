@@ -1,4 +1,4 @@
-# pretty_table
+# pretty_table_rs
 
 Turn rows of Rust data into readable tables. Customize their appearance, sort
 and filter the output, or export the same data as HTML, CSV, JSON, LaTeX, or
@@ -22,7 +22,7 @@ Add a path dependency to your application's `Cargo.toml`:
 
 ```toml
 [dependencies]
-pretty_table = { path = "../pretty_table" }
+pretty_table_rs = { path = "../pretty_table" }
 ```
 
 Adjust the path to point to the folder containing this crate's `Cargo.toml`.
@@ -31,7 +31,7 @@ The example above assumes your application and `pretty_table` are sibling folder
 Put this complete example in your application's `src/main.rs`:
 
 ```rust
-use pretty_table::{Result, Table, row};
+use pretty_table_rs::{Result, Table, row};
 
 fn main() -> Result<()> {
     let mut table = Table::with_fields(["Name", "Age"])?;
@@ -71,7 +71,7 @@ To see the included demo, run `cargo run --bin demo` from this crate's directory
 You can add one row with `add_row` or a batch with `add_rows`:
 
 ```rust
-use pretty_table::{Result, Table, row};
+use pretty_table_rs::{Result, Table, row};
 
 fn main() -> Result<()> {
     let mut table = Table::with_fields(["Name", "Age"])?;
@@ -114,7 +114,7 @@ Columns are centered by default. Use `ColumnValue::Scalar` to set every column
 and `ColumnValue::Map` to change named columns:
 
 ```rust
-use pretty_table::{Align, ColumnValue, Result, Table, row};
+use pretty_table_rs::{Align, ColumnValue, Result, Table, row};
 use std::collections::HashMap;
 
 fn main() -> Result<()> {
@@ -138,7 +138,7 @@ a setting. Scalar settings also provide defaults for columns added later.
 ### Format numbers and missing values
 
 ```rust
-use pretty_table::{ColumnValue, Result, Table, row};
+use pretty_table_rs::{ColumnValue, Result, Table, row};
 
 fn main() -> Result<()> {
     let mut table = Table::with_fields(["Item", "Price"])?;
@@ -179,7 +179,7 @@ numeric/null formatters for that column.
 ### Wrap long text
 
 ```rust
-use pretty_table::{Align, ColumnValue, Result, Table, row};
+use pretty_table_rs::{Align, ColumnValue, Result, Table, row};
 use std::collections::HashMap;
 
 fn main() -> Result<()> {
@@ -215,7 +215,7 @@ cannot fit the content returns `Error::CannotFit`.
 ### Choose a style and color theme
 
 ```rust
-use pretty_table::{Result, Table, TableStyle, Theme, Themes, row};
+use pretty_table_rs::{Result, Table, TableStyle, Theme, Themes, row};
 
 fn main() -> Result<()> {
     let mut table = Table::with_fields(["Job", "Status"])?;
@@ -253,7 +253,7 @@ Set `table.opts.border = false` for a persistent change. Use a `_with` method
 for a temporary change:
 
 ```rust
-use pretty_table::{Result, Table, row};
+use pretty_table_rs::{Result, Table, row};
 
 fn main() -> Result<()> {
     let mut table = Table::with_fields(["Name"])?;
@@ -275,7 +275,7 @@ the outer border is disabled.
 ### Sort, then show part of the result
 
 ```rust
-use pretty_table::{Result, Table, row};
+use pretty_table_rs::{Result, Table, row};
 
 fn main() -> Result<()> {
     let mut table = Table::with_fields(["Name", "Age"])?;
@@ -302,7 +302,7 @@ fn main() -> Result<()> {
 ### Keep rows that match a condition
 
 ```rust
-use pretty_table::{Cell, Result, Table, row};
+use pretty_table_rs::{Cell, Result, Table, row};
 use std::rc::Rc;
 
 fn main() -> Result<()> {
@@ -331,7 +331,7 @@ sort keys are evaluated once per row and preserve the original order on ties.
 ### Split the output into pages
 
 ```rust
-use pretty_table::{Result, Table, row};
+use pretty_table_rs::{Result, Table, row};
 use std::num::NonZeroUsize;
 
 fn main() -> Result<()> {
@@ -362,7 +362,7 @@ the format with `get_formatted_string(Format::Json)`, for example.
 ### JSON keeps numbers as numbers
 
 ```rust
-use pretty_table::{Result, Table, from_json, row};
+use pretty_table_rs::{Result, Table, from_json, row};
 
 fn main() -> Result<()> {
     let mut table = Table::with_fields(["Name", "Age"])?;
@@ -394,7 +394,7 @@ use formatted cell text.
 Requires the `csv` feature, which is enabled by default.
 
 ```rust,ignore
-use pretty_table::{Cell, Result, from_csv};
+use pretty_table_rs::{Cell, Result, from_csv};
 
 fn main() -> Result<()> {
     let input = "Name,Age\r\nAlice,30\r\nBob,8\r\n";
@@ -417,7 +417,7 @@ Requires the `html` feature, which is enabled by default. HTML **output** is
 available even when this feature is disabled.
 
 ```rust,ignore
-use pretty_table::{Cell, Result, from_html_one};
+use pretty_table_rs::{Cell, Result, from_html_one};
 
 fn main() -> Result<()> {
     let html = "<table><tr><th>Note</th></tr>\
@@ -474,7 +474,7 @@ exporters without either parser:
 
 ```toml
 [dependencies]
-pretty_table = { path = "../pretty_table", default-features = false }
+pretty_table_rs = { path = "../pretty_table", default-features = false }
 ```
 
 Add `features = ["csv"]` or `features = ["html"]` to enable either one separately.

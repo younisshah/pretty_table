@@ -7,7 +7,7 @@ use serde_json::Value;
 /// Read a field-name array followed by row objects, keeping scalar value types.
 ///
 /// ```
-/// use pretty_table::{from_json, row};
+/// use pretty_table_rs::{from_json, row};
 /// let table = from_json(r#"[["Name","Age"],{"Age":30,"Name":"Ada"}]"#).unwrap();
 /// assert_eq!(table.rows()[0], row!["Ada", 30]);
 /// ```

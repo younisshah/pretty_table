@@ -23,7 +23,7 @@ impl Theme {
     /// Accept a short color number or an already complete terminal color command.
     ///
     /// ```
-    /// use pretty_table::Theme;
+    /// use pretty_table_rs::Theme;
     /// assert_eq!(Theme::format_code("31"), "\x1b[31m");
     /// assert_eq!(Theme::format_code(""), "");
     /// ```

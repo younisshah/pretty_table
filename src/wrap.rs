@@ -214,7 +214,7 @@ fn trim_visible_end(line: &str) -> (String, String) {
 /// Put as much text as fits on each line, keeping visible characters whole.
 ///
 /// ```
-/// use pretty_table::wrap::wrap;
+/// use pretty_table_rs::wrap::wrap;
 /// assert_eq!(wrap("red green", 5, true).unwrap(), vec!["red", "green"]);
 /// assert_eq!(wrap("中文", 2, true).unwrap(), vec!["中", "文"]);
 /// ```

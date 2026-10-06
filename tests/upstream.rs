@@ -1,5 +1,5 @@
 //! Independent Python-oracle fixtures. See tools/generate_fixtures.py for provenance.
-use pretty_table::{
+use pretty_table_rs::{
     Align, Cell, ColumnValue, HRuleStyle, HeaderStyle, Table, TableStyle, Theme, VAlign, VRuleStyle,
 };
 use serde_json::Value;
@@ -66,7 +66,7 @@ fn size_map(v: &Value, fields: &[String]) -> HashMap<String, usize> {
         .collect()
 }
 
-fn build(f: &Value) -> pretty_table::Result<Table> {
+fn build(f: &Value) -> pretty_table_rs::Result<Table> {
     let fields: Vec<String> = f["fields"]
         .as_array()
         .unwrap()
@@ -219,7 +219,7 @@ fn build(f: &Value) -> pretty_table::Result<Table> {
     Ok(t)
 }
 
-fn check_format(format: &str, render: impl Fn(&Table, &Value) -> pretty_table::Result<String>) {
+fn check_format(format: &str, render: impl Fn(&Table, &Value) -> pretty_table_rs::Result<String>) {
     let data = fixtures();
     let corrections: Value = serde_json::from_str(include_str!("data/corrections.json")).unwrap();
     let filter = std::env::var("PRETTY_TABLE_FIXTURE_ID").ok();
@@ -295,7 +295,7 @@ fn upstream_csv_snapshots() {
 fn upstream_json_snapshots() {
     check_format("get_json_string", |t, f| {
         let opts = &f["format_options"];
-        let mut style = pretty_table::JsonStyle::default();
+        let mut style = pretty_table_rs::JsonStyle::default();
         if opts.get("indent").is_some() {
             style.indent = number(&opts["indent"]);
         }

@@ -37,7 +37,7 @@ impl Table {
     /// Choose indentation and separators; None gives a single line.
     ///
     /// ```
-    /// use pretty_table::{JsonStyle, Table, row};
+    /// use pretty_table_rs::{JsonStyle, Table, row};
     /// let mut table = Table::with_fields(["Age"]).unwrap();
     /// table.add_row(row![30]).unwrap();
     /// let json = table.get_json_string_with_style(JsonStyle {

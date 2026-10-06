@@ -79,7 +79,7 @@ impl Table {
     /// Create a table with unique column names.
     ///
     /// ```
-    /// use pretty_table::{Table, row};
+    /// use pretty_table_rs::{Table, row};
     /// let mut table = Table::with_fields(["Name", "Age"]).unwrap();
     /// table.add_row(row!["Ada", 30]).unwrap();
     /// assert_eq!(table.row_count(), 1);
@@ -611,7 +611,7 @@ impl Table {
     /// Change the appearance for this call without changing the stored options.
     ///
     /// ```
-    /// use pretty_table::{Table, row};
+    /// use pretty_table_rs::{Table, row};
     /// let mut table = Table::with_fields(["Name"]).unwrap();
     /// table.add_row(row!["Ada"]).unwrap();
     /// let plain = table.get_string_with(|o| o.border = false).unwrap();

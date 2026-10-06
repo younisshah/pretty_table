@@ -1,4 +1,4 @@
-use pretty_table::{Align, Cell, ColumnValue, Error, Table, cmp_cells, row};
+use pretty_table_rs::{Align, Cell, ColumnValue, Error, Table, cmp_cells, row};
 use std::cmp::Ordering;
 #[test]
 fn numeric_exact() {

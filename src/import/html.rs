@@ -86,7 +86,7 @@ pub fn from_html(input: &str) -> Result<Vec<Table>> {
 /// Read exactly one HTML table; zero or multiple tables are an error.
 ///
 /// ```
-/// use pretty_table::{Cell, from_html_one};
+/// use pretty_table_rs::{Cell, from_html_one};
 /// let table = from_html_one(
 ///     "<table><tr><th>Note</th></tr><tr><td>First<br>Second</td></tr></table>"
 /// ).unwrap();

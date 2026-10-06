@@ -1,6 +1,6 @@
 //! Run with cargo run --bin demo to see every built-in style and theme.
 
-use pretty_table::{Result, Table, TableStyle, Theme, Themes, row};
+use pretty_table_rs::{Result, Table, TableStyle, Theme, Themes, row};
 
 fn main() -> Result<()> {
     let mut cities = Table::with_fields(["City name", "Area", "Population", "Annual Rainfall"])?;

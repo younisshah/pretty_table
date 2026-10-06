@@ -1,4 +1,4 @@
-use pretty_table::*;
+use pretty_table_rs::*;
 
 fn plain_lines(text: &str) -> String {
     text.lines().map(strip_ansi).collect::<Vec<_>>().join("\n")

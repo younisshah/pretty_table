@@ -1,4 +1,4 @@
-use pretty_table::*;
+use pretty_table_rs::*;
 use std::{cell::RefCell, cmp::Ordering, collections::HashMap, num::NonZeroUsize, rc::Rc};
 #[test]
 fn stable_reverse_key_once() {

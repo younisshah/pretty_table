@@ -6,7 +6,7 @@ use crate::{Error, Result, Table};
 /// Read a CSV header and string cells, trimming spaces and checking row lengths.
 ///
 /// ```
-/// use pretty_table::{Cell, from_csv};
+/// use pretty_table_rs::{Cell, from_csv};
 /// let table = from_csv("Name,Age\nAda,30\n", b',').unwrap();
 /// assert_eq!(table.rows()[0][1], Cell::Str("30".into()));
 /// ```

@@ -1,4 +1,4 @@
-use pretty_table::*;
+use pretty_table_rs::*;
 
 #[test]
 fn json_import_preserves_integer_limits_and_scalars() {

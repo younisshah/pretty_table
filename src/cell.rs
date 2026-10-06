@@ -10,7 +10,7 @@ use std::cmp::Ordering;
 /// `Int(1)` and `UInt(1)` are different values for `==`, but sort equally.
 ///
 /// ```
-/// use pretty_table::Cell;
+/// use pretty_table_rs::Cell;
 /// assert_eq!(Cell::from(30_i64), Cell::Int(30));
 /// assert_eq!(Cell::from("30"), Cell::Str("30".into()));
 /// assert_eq!(Cell::from(None::<u64>), Cell::None);
@@ -137,7 +137,7 @@ fn int_float(i: i128, f: f64) -> Option<Ordering> {
 /// Text compares with text. A number and a string, or a NaN, produce an error.
 ///
 /// ```
-/// use pretty_table::{Cell, cmp_cells};
+/// use pretty_table_rs::{Cell, cmp_cells};
 /// use std::cmp::Ordering;
 /// assert_eq!(cmp_cells(&Cell::Int(10), &Cell::Float(2.5)).unwrap(), Ordering::Greater);
 /// assert!(cmp_cells(&Cell::Int(2), &Cell::from("2")).is_err());
@@ -172,7 +172,7 @@ fn cmp_rows(a: &[Cell], b: &[Cell]) -> Result<Ordering> {
 /// A custom key is computed once per row. Equal keys keep their original order.
 ///
 /// ```
-/// use pretty_table::{row, try_sort};
+/// use pretty_table_rs::{row, try_sort};
 /// let rows = vec![row!["Bob"], row!["Ada"]];
 /// assert_eq!(try_sort(&rows, None, false).unwrap(), vec![1, 0]);
 /// assert_eq!(rows[0], row!["Bob"]);
@@ -218,7 +218,7 @@ pub fn try_sort(
 /// Build a row containing different supported value types.
 ///
 /// ```
-/// use pretty_table::{Cell, row};
+/// use pretty_table_rs::{Cell, row};
 /// let values = row!["Ada", 30, true];
 /// assert_eq!(values[1], Cell::Int(30));
 /// ```

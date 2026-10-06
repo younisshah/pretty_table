@@ -68,7 +68,7 @@ pub fn strip_ansi(s: &str) -> String {
 /// Count visible columns on one line, ignoring terminal codes and control characters.
 ///
 /// ```
-/// use pretty_table::display_width;
+/// use pretty_table_rs::display_width;
 /// assert_eq!(display_width("中"), 2);
 /// assert_eq!(display_width("e\u{301}"), 1);
 /// assert_eq!(display_width("\x1b[31mred\x1b[0m"), 3);
@@ -125,7 +125,7 @@ pub(crate) fn clusters(s: &str) -> Vec<String> {
 /// Keep the longest prefix that fits, without cutting a visible character apart.
 ///
 /// ```
-/// use pretty_table::truncate;
+/// use pretty_table_rs::truncate;
 /// assert_eq!(truncate("中文", 2), "中");
 /// assert_eq!(truncate("abcdef", 3), "abc");
 /// ```

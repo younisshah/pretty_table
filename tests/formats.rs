@@ -1,4 +1,4 @@
-use pretty_table::*;
+use pretty_table_rs::*;
 use std::rc::Rc;
 
 fn sample() -> Table {

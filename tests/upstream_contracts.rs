@@ -1,5 +1,5 @@
 //! Native equivalents of upstream model/validation tests that do not render a snapshot.
-use pretty_table::*;
+use pretty_table_rs::*;
 use std::{collections::HashMap, rc::Rc};
 
 #[test]

@@ -1,4 +1,4 @@
-use pretty_table::*;
+use pretty_table_rs::*;
 use std::rc::Rc;
 #[test]
 fn zero_column_rows_reject_new_schema_atomically() {

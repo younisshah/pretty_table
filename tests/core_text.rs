@@ -1,4 +1,4 @@
-use pretty_table::*;
+use pretty_table_rs::*;
 #[test]
 fn basic_text() {
     let mut t = Table::with_fields(["A", "B"]).unwrap();
