@@ -1,5 +1,7 @@
 # pretty_table_rs
 
+[crates.io](https://crates.io/crates/pretty_table_rs) · [API documentation](https://docs.rs/pretty_table_rs)
+
 Turn rows of Rust data into readable tables. Customize their appearance, sort
 and filter the output, or export the same data as HTML, CSV, JSON, LaTeX, or
 MediaWiki markup.
@@ -17,16 +19,15 @@ It requires **Rust 1.85 or newer**. Building and using it does not require Pytho
 
 ## Get started
 
-The crate is available locally and has not been published to crates.io.
-Add a path dependency to your application's `Cargo.toml`:
+Install the published crate from crates.io by adding this to your application's
+`Cargo.toml`:
 
 ```toml
 [dependencies]
-pretty_table_rs = { path = "../pretty_table" }
+pretty_table_rs = "0.1.0"
 ```
 
-Adjust the path to point to the folder containing this crate's `Cargo.toml`.
-The example above assumes your application and `pretty_table` are sibling folders.
+Or run `cargo add pretty_table_rs` in your application's directory.
 
 Put this complete example in your application's `src/main.rs`:
 
@@ -43,7 +44,7 @@ fn main() -> Result<()> {
 }
 ```
 
-Run `cargo run` in your application:
+Output:
 
 ```text
 +-------+-----+
@@ -53,6 +54,8 @@ Run `cargo run` in your application:
 |  Bob  |  8  |
 +-------+-----+
 ```
+
+Run `cargo run` in your application to see the table.
 
 Three things are happening:
 
@@ -82,6 +85,18 @@ fn main() -> Result<()> {
     println!("{}", table.get_string()?);
     Ok(())
 }
+```
+
+Output:
+
+```text
++-------+-----+
+|  Name | Age |
++-------+-----+
+| Alice |  30 |
+|  Bob  |  8  |
+| Carol |  42 |
++-------+-----+
 ```
 
 The final `false` means **do not add a section divider after this batch**.
@@ -131,6 +146,17 @@ fn main() -> Result<()> {
 }
 ```
 
+Output:
+
+```text
++-------+-----+
+| Name  | Age |
++-------+-----+
+| Alice |  30 |
+| Bob   |   8 |
++-------+-----+
+```
+
 Names now align left and ages align right. The same `Scalar`/`Map` pattern works
 for widths, vertical alignment, and value formatting. `ColumnValue::None` clears
 a setting. Scalar settings also provide defaults for columns added later.
@@ -155,6 +181,8 @@ fn main() -> Result<()> {
     Ok(())
 }
 ```
+
+Output:
 
 ```text
 +--------+-------+
@@ -195,6 +223,8 @@ fn main() -> Result<()> {
 }
 ```
 
+Output:
+
 ```text
 +--------+--------------+
 | Task   | Note         |
@@ -228,6 +258,16 @@ fn main() -> Result<()> {
 }
 ```
 
+Output (ANSI colors omitted here):
+
+```text
+┌───────┬────────┐
+│  Job  │ Status │
+├───────┼────────┤
+│ Build │  Done  │
+└───────┴────────┘
+```
+
 Apply the theme first, then the style, to use the theme's colors with the chosen
 border. A theme sets glyph defaults; later style or explicit glyph changes win.
 `table.set_theme(None)?` removes colors while keeping the current glyphs.
@@ -247,6 +287,49 @@ Themes: `Default`, `DyslexiaFriendly`, `Earth`, `GlareReduction`, `HighContrast`
 `Lavender`, `Ocean`, `OceanDeep`, and `Pastel`. Use `Theme::new` for custom colors
 and glyphs. Cells may also contain ANSI color codes or OSC 8 hyperlinks.
 
+### Compare border styles
+
+The same rows can use different borders or Markdown formatting:
+
+```rust
+use pretty_table_rs::{Result, Table, TableStyle, row};
+
+fn main() -> Result<()> {
+    let mut table = Table::with_fields(["Job", "Status"])?;
+    table.add_row(row!["Build", "Done"])?;
+
+    for (name, style) in [
+        ("Double border", TableStyle::DoubleBorder),
+        ("Markdown", TableStyle::Markdown),
+        ("Plain columns", TableStyle::PlainColumns),
+    ] {
+        table.set_style(style)?;
+        println!("{name}:\n{}\n", table.get_string()?);
+    }
+    Ok(())
+}
+```
+
+Output:
+
+```text
+Double border:
+╔═══════╦════════╗
+║  Job  ║ Status ║
+╠═══════╬════════╣
+║ Build ║  Done  ║
+╚═══════╩════════╝
+
+Markdown:
+|  Job  | Status |
+| :---: | :----: |
+| Build |  Done  |
+
+Plain columns:
+ Job         Status
+Build         Done
+```
+
 ### Change options for one call
 
 Set `table.opts.border = false` for a persistent change. Use a `_with` method
@@ -264,6 +347,18 @@ fn main() -> Result<()> {
     assert!(table.opts.border);
     Ok(())
 }
+```
+
+Output:
+
+```text
+  Name
+ Alice
++-------+
+|  Name |
++-------+
+| Alice |
++-------+
 ```
 
 Other common options are `title`, `header`, `padding_width`, `hrules`, and
@@ -295,6 +390,17 @@ fn main() -> Result<()> {
 }
 ```
 
+Output:
+
+```text
++-------+-----+
+|  Name | Age |
++-------+-----+
+|  Bob  |  8  |
+| Alice |  30 |
++-------+-----+
+```
+
 `end` is exclusive: `start = 0, end = Some(2)` selects two rows. Set
 `reversesort = true` for descending order. To display selected columns, set
 `fields = Some(vec!["Name".into()])`; columns retain their original schema order.
@@ -317,6 +423,16 @@ fn main() -> Result<()> {
     assert!(output.contains("Alice") && !output.contains("Bob"));
     Ok(())
 }
+```
+
+Output:
+
+```text
++-------+-----+
+|  Name | Age |
++-------+-----+
+| Alice |  30 |
++-------+-----+
 ```
 
 The filter receives a whole row; here `row[1]` is its age. `Rc::new` lets the
@@ -343,6 +459,25 @@ fn main() -> Result<()> {
     assert_eq!(output.matches("--- next page ---").count(), 1);
     Ok(())
 }
+```
+
+Output:
+
+```text
++-------+
+|  Name |
++-------+
+| Alice |
+|  Bob  |
++-------+
+
+--- next page ---
+
++-------+
+|  Name |
++-------+
+| Carol |
++-------+
 ```
 
 ## Import and export
@@ -376,14 +511,22 @@ fn main() -> Result<()> {
 }
 ```
 
-The JSON contains a column-name array followed by row objects:
+Output:
 
 ```json
 [
-    ["Name", "Age"],
-    {"Age": 30, "Name": "Alice"}
+    [
+        "Name",
+        "Age"
+    ],
+    {
+        "Age": 30,
+        "Name": "Alice"
+    }
 ]
 ```
+
+The JSON contains a column-name array followed by row objects.
 
 JSON uses the original values, even when display formatters are active.
 `JsonStyle` lets you choose indentation and separators. Other output formats
@@ -405,6 +548,17 @@ fn main() -> Result<()> {
     assert_eq!(table.rows()[0][1], Cell::Str("30".into()));
     Ok(())
 }
+```
+
+Output:
+
+```text
++-------+-----+
+|  Name | Age |
++-------+-----+
+| Alice |  30 |
+|  Bob  |  8  |
++-------+-----+
 ```
 
 The first record supplies the column names. CSV imports cells as strings, so
@@ -430,6 +584,17 @@ fn main() -> Result<()> {
 }
 ```
 
+Output:
+
+```text
++--------+
+|  Note  |
++--------+
+| First  |
+| Second |
++--------+
+```
+
 `from_html_one` requires exactly one table. Use `from_html` for a list of tables,
 including nested ones. `from_mediawiki` reads the simple header-and-row format
 produced by the MediaWiki exporter.
@@ -437,6 +602,43 @@ produced by the MediaWiki exporter.
 HTML output escapes text by default. Its options include `format = true` for
 inline layout styling and `xhtml = true` for `<br/>` line breaks. LaTeX output
 emits cell content verbatim; escape special LaTeX characters in your input.
+
+### Export HTML
+
+The same table data can become HTML for a report or web page:
+
+```rust
+use pretty_table_rs::{Result, Table, row};
+
+fn main() -> Result<()> {
+    let mut table = Table::with_fields(["Name", "Age"])?;
+    table.add_row(row!["Alice & Bob", 30])?;
+
+    println!("{}", table.get_html_string()?);
+    Ok(())
+}
+```
+
+Output:
+
+```html
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Alice &amp; Bob</td>
+            <td>30</td>
+        </tr>
+    </tbody>
+</table>
+```
+
+The `&` becomes `&amp;` so the browser displays the original text correctly.
 
 ## More table operations
 
@@ -474,7 +676,7 @@ exporters without either parser:
 
 ```toml
 [dependencies]
-pretty_table_rs = { path = "../pretty_table", default-features = false }
+pretty_table_rs = { version = "0.1.0", default-features = false }
 ```
 
 Add `features = ["csv"]` or `features = ["html"]` to enable either one separately.
@@ -502,10 +704,9 @@ The port targets Python PrettyTable **3.18.0**, commit
 output comparisons**, with documented corrections for upstream bugs. Normal
 Rust tests use these saved files and need neither Python nor an `upstream/` checkout.
 
-See [compatibility notes](docs/COMPATIBILITY.md), the
-[upstream test mapping](tests/MANIFEST.md), and [verification record](docs/VERIFICATION.md)
-for details. The optional scripts in `tools/` regenerate maintenance artifacts.
+The reference outputs live in `tests/data/upstream_rendering.json`; approved
+corrections are recorded in `tests/data/corrections.json`.
 
 CI is configured for Linux, macOS, and Windows with stable Rust and Rust 1.85.0.
 
-BSD-3-Clause. See [LICENSE](https://github.com/younisshah/pretty_table/blob/main/LICENSE) and [third-party notices](docs/THIRD_PARTY_NOTICES.md).
+BSD-3-Clause. See [LICENSE](https://github.com/younisshah/pretty_table/blob/main/LICENSE) and [third-party notices](https://github.com/younisshah/pretty_table/blob/main/docs/THIRD_PARTY_NOTICES.md).
